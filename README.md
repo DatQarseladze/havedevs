@@ -83,35 +83,6 @@ Before running the project, you need to set up a .env file at the root of your p
 NEXT_PUBLIC_API_KEY=your-api-key-here
 ```
 
-Usage of API Key
-In the HomePage component, the NEXT_PUBLIC_API_KEY is used to access the News API, specifically when making requests for top headlines:
-
-ts
-const fetchArticles = async (page: number) => {
-  setLoading(true);
-  setProgress(0);
-  simulateProgress();
-
-  try {
-    const response = await axios.get<NewsApiResponse>("/top-headlines", {
-      params: {
-        country: "us",
-        category: "business",
-        page,
-        pageSize: articlesPerPage,
-        apiKey: process.env.NEXT_PUBLIC_API_KEY, // Referencing the API key from the environment variable
-      },
-    });
-    setArticles(response.data.articles);
-    setTotalResults(response.data.totalResults);
-    setLoading(false);
-    setProgress(100);
-  } catch (error: unknown) {
-    setError(`Failed to fetch articles. ${error}`);
-    setLoading(false);
-    setProgress(0);
-  }
-};
 Important Notes
 Do not check your .env file into version control. Ensure it is added to your .gitignore file.
 Replace your-api-key-here with the actual API key provided by the News API.
